@@ -50,7 +50,7 @@ Server starts at: `http://localhost:8080/api/v1` - intellij Terminal
 
 ## Report – Answers to Coursework Questions
 
-### Part 1.1 – JAX-RS Resource Lifecycle
+### Part 1.1 - JAX-RS Resource Lifecycle
 
 By default, JAX-RS creates a **new instance of every resource class for each incoming HTTP request** (per-request scope). This is known as the default lifecycle. The runtime does not reuse instances across requests.
 
@@ -58,7 +58,7 @@ By default, JAX-RS creates a **new instance of every resource class for each inc
 
 
 
-### Part 1.2 – Why HATEOAS is a Hallmark of Advanced REST Design
+### Part 1.2 - Why HATEOAS is a Hallmark of Advanced REST Design
 
 HATEOAS (Hypermedia as the Engine of Application State) means that API responses embed links to related resources and available actions. For example, a GET /rooms response might include a link to that room's sensors.
 
@@ -70,7 +70,7 @@ HATEOAS (Hypermedia as the Engine of Application State) means that API responses
 
 
 
-### Part 2.1 – Returning IDs vs Full Objects in a List
+### Part 2.1 - Returning IDs vs Full Objects in a List
 
 | Approach | Pros | Cons |
 |----------|------|------|
@@ -81,7 +81,7 @@ For the Smart Campus use-case where clients (facilities managers, dashboards) ne
 
 
 
-### Part 2.2 – Is DELETE Idempotent in This Implementation?
+### Part 2.2 - Is DELETE Idempotent in This Implementation?
 
 Technically, **DELETE is not strictly idempotent** in this implementation. Idempotency means repeated identical requests produce the same result. Here:
 - **First DELETE on a room:** returns `204 No Content` (room removed).
@@ -91,13 +91,13 @@ The *server state* after both calls is identical (the room is absent), which sat
 
 
 
-### Part 3.1 – Effect of @Consumes Mismatch
+### Part 3.1 - Effect of @Consumes Mismatch
 
 The `@Consumes(MediaType.APPLICATION_JSON)` annotation tells JAX-RS that the endpoint only accepts requests with `Content-Type: application/json`. If a client sends data as `text/plain` or `application/xml`, the JAX-RS runtime checks the `Content-Type` header before even invoking the method. Because no matching method is found for that media type, **Jersey automatically returns `415 Unsupported Media Type`** without the resource method ever executing. This protects the API from receiving data it cannot deserialise, and eliminates the need for manual content-type checking inside every method.
 
 
 
-### Part 3.2 – @QueryParam vs Path Segment for Filtering
+### Part 3.2 - @QueryParam vs Path Segment for Filtering
 
 | Design | Example | Use-case |
 |--------|---------|----------|
@@ -112,7 +112,7 @@ The `@Consumes(MediaType.APPLICATION_JSON)` annotation tells JAX-RS that the end
 
 
 
-### Part 4.1 – Benefits of the Sub-Resource Locator Pattern
+### Part 4.1 - Benefits of the Sub-Resource Locator Pattern
 
 The sub-resource locator pattern (returning an instance of a delegate class from a `@Path` method) separates concerns by giving each nested resource its own class. Benefits include:
 
@@ -124,7 +124,7 @@ The sub-resource locator pattern (returning an instance of a delegate class from
 
 
 
-### Part 5.2 – Why 422 is More Accurate Than 404 for a Missing Reference
+### Part 5.2 - Why 422 is More Accurate Than 404 for a Missing Reference
 
 - **404 Not Found** means the requested URL/resource itself does not exist on the server.
 - **422 Unprocessable Entity** means the request URL is valid and the server understood the request, but the **payload content is semantically invalid** — in this case, the `roomId` field references a room that does not exist.
@@ -133,7 +133,7 @@ Using 404 would be misleading: the `/api/v1/sensors` endpoint clearly exists. Th
 
 
 
-### Part 5.4 – Security Risks of Exposing Java Stack Traces
+### Part 5.4 - Security Risks of Exposing Java Stack Traces
 
 Exposing raw stack traces to API consumers is a significant security risk:
 
@@ -146,7 +146,7 @@ The `GlobalExceptionMapper` in this project logs the full trace **server-side** 
 
 
 
-### Part 5.5 – Why Filters are Better than Manual Logger Calls
+### Part 5.5 - Why Filters are Better than Manual Logger Calls
 
 Using JAX-RS filters for cross-cutting concerns like logging has significant advantages over placing `Logger.info()` inside every resource method:
 
